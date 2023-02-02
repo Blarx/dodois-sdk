@@ -1,6 +1,6 @@
 {
     "name": "blarx/dodois-api",
-    "description": "Laravel 9 Dodois Connection",
+    "description": "Laravel 9 Dodois SDK",
     "type": "project",
     "license": "MIT",
     "authors": [

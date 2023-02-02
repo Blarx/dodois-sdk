@@ -20,6 +20,7 @@ protected $listen = [
 How it use? In Controller:
 ```php
 use Dodois\Contracts\ClientContract;
+use Dodois\Contracts\PublicApiContract;
 
 ...
 
@@ -60,6 +61,12 @@ class PageController {
                 'to' => now(),
                 'units' => $units->pluck('id'),
             ]);
+    }
+    
+    public function other(PublicApiContract $dodois, ...)
+    {
+        $units = $dodois->units();
+        $unitsKz = $dodois->units('kz');
     }
 }
 ```

@@ -3,6 +3,7 @@ namespace Dodois;
 
 use Dodois\Contracts\ClientContract;
 use Dodois\Contracts\ConnectionContract;
+use Dodois\Contracts\PublicApiContract;
 use Illuminate\Support\ServiceProvider;
 
 class DodoisServiceProvider extends ServiceProvider
@@ -14,6 +15,7 @@ class DodoisServiceProvider extends ServiceProvider
      */
     public $singletons = [
         ClientContract::class => Client::class,
+        PublicApiContract::class => PublicApi::class,
     ];
 
     /**
