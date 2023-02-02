@@ -1,12 +1,7 @@
 ## Dodois API SDK
 
-```env
-DODOIS_CLIENTID=
-DODOIS_SECRET=
-DODOIS_REDIRECTURI=/dodois/callback
-```
-
 In `EventServiceProvider`:
+
 ```php
 use Dodois\Events\Connected;
 ...
@@ -18,6 +13,7 @@ protected $listen = [
 ```
 
 How it use? In Controller:
+
 ```php
 use Dodois\Contracts\ClientContract;
 use Dodois\Contracts\PublicApiContract;
@@ -85,4 +81,12 @@ You can publish the config with:
 
 ```bash
 php artisan vendor:publish --provider="Dodois\DodoisServiceProvider" --tag="dodois-config"
+```
+
+Add in you .env file:
+
+```env
+DODOIS_CLIENTID=
+DODOIS_SECRET=
+DODOIS_REDIRECTURI=/dodois/callback
 ```
