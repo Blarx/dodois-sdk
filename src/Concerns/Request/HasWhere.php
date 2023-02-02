@@ -3,6 +3,7 @@
 namespace Dodois\Concerns\Request;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 /**
  * @mixin \Dodois\Contracts\ResourceContract
@@ -40,6 +41,7 @@ trait HasWhere
     {
         return match (true) {
             $value instanceof Carbon => $value->toIso8601String(),
+            $value instanceof Collection => implode(',', $value->all()),
             is_string($value) => $value,
             is_array($value) => implode(',', $value),
             is_bool($value) => $value ? 'true' : 'false',
