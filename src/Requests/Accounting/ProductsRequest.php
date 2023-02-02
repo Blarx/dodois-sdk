@@ -18,7 +18,6 @@ class ProductsRequest implements RequestContract
     public function list(array $query = []): Collection
     {
         $query = $this->getWhereQuery($query);
-        $this->validateUnitParams($query);
 
         $skip = 0;
         $take = 1000;

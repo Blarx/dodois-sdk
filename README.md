@@ -17,7 +17,7 @@ protected $listen = [
 ];
 ```
 
-In Controller:
+How it use? In Controller:
 ```php
 use Dodois\Contracts\ClientContract;
 
@@ -27,11 +27,39 @@ class PageController {
     public function page(ClientContract $dodois, ...) {
         
         ...
-        
+        // Query to auth/ resource
         $units = $dodois->withToken('access_token')
             ->auth()->units()->list();
         
-        dd($units);
+        $roles = $dodois->withToken('access_token')
+            ->auth()->roles()->list();
+        
+        // Prefix config
+        $products = $dodois->withToken('access_token')
+            ->accounting('dodopizza', 'ru') // Default
+            ->products()
+            ->where('isProducible', true)
+            ->list();
+        
+        // Where Variant One
+        $sales = $dodois->withToken('access_token')
+            ->accounting()->sales()
+            ->whereBetween(
+                now()->subDay(), // From
+                now(), // To
+            )
+            ->where('units', $units->pluck('id'))
+            ->where('salesChannel', 'Delivery')
+            ->list();
+        
+        // Where Variant Two
+        $products = $dodois->withToken('access_token')
+            ->accounting()->semiFinishedProductsProduction()
+            ->list([
+                'from' => now()->subDay(),
+                'to' => now(),
+                'units' => $units->pluck('id'),
+            ]);
     }
 }
 ```
