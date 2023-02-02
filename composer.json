@@ -1,0 +1,28 @@
+{
+    "name": "blarx/dodois-api",
+    "description": "Laravel 9 Dodois Connection",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandr",
+            "email": "flatbusy@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Dodois\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dodois\\DodoisServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "illuminate/support": "^8.0|^9.0|^10.0"
+    }
+}
