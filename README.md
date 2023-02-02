@@ -41,7 +41,7 @@ class PageController {
 You can install the package via composer:
 
 ```bash
-composer require spatie/laravel-activitylog
+composer require blarx/dodois-sdk
 ```
 
 The package will automatically register itself.
