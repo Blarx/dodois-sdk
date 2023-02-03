@@ -25,7 +25,7 @@ class Connection implements ConnectionContract
         return Cache::remember(
             'dodois.oauth',
             now()->addDay(),
-            [$this, 'makeOAuthConfigurationRequest'],
+            fn () => $this->makeOAuthConfigurationRequest(),
         );
     }
 
