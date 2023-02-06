@@ -2,10 +2,15 @@
 namespace Dodois;
 
 use Dodois\Contracts\ClientContract;
+use Illuminate\Http\Client\PendingRequest;
 
 class Client implements ClientContract
 {
     use Concerns\Client\SendRequest;
+
+    public function __construct(
+        public readonly PendingRequest $request,
+    ) {}
 
     public function auth(): Resources\AuthResource
     {
