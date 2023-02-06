@@ -133,7 +133,7 @@ The package will automatically register itself.
 You can publish the config with:
 
 ```bash
-php artisan vendor:publish --provider="Dodois\DodoisServiceProvider" --tag="dodois-config"
+php artisan vendor:publish --provider="Dodois\DodoisServiceProvider"
 ```
 
 Add in you .env file:
