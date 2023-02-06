@@ -14,7 +14,7 @@ class Client implements ClientContract
 
     public function auth(): Resources\AuthResource
     {
-        return new Resources\AuthResource($this);
+        return new Resources\AuthResource($this->prepare());
     }
 
     /**
