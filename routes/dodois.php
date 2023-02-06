@@ -1,6 +1,7 @@
 <?php
 
 use Dodois\Contracts\ConnectionContract;
+use Dodois\Events\CallbackRedirected;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -25,27 +26,39 @@ Route::middleware('web')->group(function () {
     })->name('dodois:redirect');
 
     Route::get(config('dodois.connection.callbackRoute', '/dodois/callback'), function (ConnectionContract $dodois, Request $request) {
+        $response = redirect(config('dodois.connection.redirectUri', '/dashboard'));
+
         if (! $request->session()->has('code_verifier')) {
-            return redirect()->route('dashboard.accounts')->with([
-                'message' => __("Account create error, no ':field'.", [
+            CallbackRedirected::dispatch(
+                $response,
+                __("Account create error, no ':field'.", [
                     'field' => 'code_verifier',
                 ]),
-            ]);
+            );
+
+            return $response;
         }
         if (! $request->has('code')) {
-            return redirect()->route('dashboard.accounts')->with([
-                'message' => __("Account create error, no ':field'.", [
+            CallbackRedirected::dispatch(
+                $response,
+                __("Account create error, no ':field'.", [
                     'field' => 'code',
                 ]),
-            ]);
+            );
+
+            return $response;
         }
 
         $codeVerifier = $request->session()->pull('code_verifier');
+        $dodois->makeTokenRequest($codeVerifier, $request->code);
 
-        $response = $dodois->makeTokenRequest($codeVerifier, $request->code);
+        CallbackRedirected::dispatch(
+            $response,
+            __("Account create error, no ':field'.", [
+                'field' => 'code',
+            ]),
+        );
 
-        return redirect()->route('dashboard.accounts')->with([
-            'message' => __('Account sucessfully created!'),
-        ]);
+        return $response;
     });
 });
