@@ -11,8 +11,8 @@ class CallbackRedirected
     /**
      * Create a new event instance.
      *
-     * @param array  $response
-     * @param bool  $refresh
+     * @param \Illuminate\Http\RedirectResponse  $response
+     * @param string  $errorMessage
      * @return void
      */
     public function __construct(
