@@ -4,13 +4,66 @@ In `EventServiceProvider`:
 
 ```php
 use Dodois\Events\Connected;
+use Dodois\Events\CallbackRedirected;
 ...
 protected $listen = [
     Connected::class => [
         YourTokenListener::class,
     ],
+    CallbackRedirected::class => [
+        YourRedirectListener::class,
+    ],
 ];
 ```
+`YourTokenListener.php` Example:
+```php
+use App\Models\DodoisAccount;
+use Dodois\Events\Connected;
+
+class YourTokenListener
+{
+    public function handle(Connected $event)
+    {
+        $idToken = $event->response['id_token'];
+
+        DodoisAccount::updateOrCreate([
+            'sub' => $idToken['sub'],
+        ], [
+            'user_id' => optional(auth()->user())->id,
+            'access_token' => $event->response['access_token'],
+            'refresh_token' => $event->response['refresh_token'],
+            'expires_in' => $event->response['expires_in'],
+            'scope' => $event->response['scope'],
+            'properties' => [
+                ...$event->response,
+                'id_token' => $idToken,
+            ],
+        ]);
+    }
+
+    protected function parseJwt(string $token)
+    {
+        return json_decode(base64_decode(
+            str_replace('_', '/', str_replace('-', '+', explode('.', $token)[1]))
+        ), true);
+    }
+}
+```
+`YourRedirectListener.php` Example:
+```php
+use Dodois\Events\CallbackRedirected;
+
+class YourTokenListener
+{
+    public function handle(CallbackRedirected $event)
+    {
+        $event->response->with([
+            'message' => $event->errorMessage ?: __('Account was added'),
+        ]);
+    }
+}
+```
+
 
 How it use? In Controller:
 
