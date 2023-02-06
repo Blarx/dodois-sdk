@@ -6,7 +6,7 @@ use Dodois\Contracts\ResourceContract;
 use Dodois\Requests\Auth\RolesRequest;
 use Dodois\Requests\Auth\UnitsRequest;
 
-class AuthResource extends ResourceContract
+class AuthResource implements ResourceContract
 {
     use CanAccessClient;
 
