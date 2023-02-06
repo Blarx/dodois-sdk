@@ -1,5 +1,10 @@
 # Release Notes
 
+## v0.1.5
+### Added
+- Event `CallbackRedirected`
+### Fixes
+- Config
 ## v0.1.1
 ### Added
 - Connection Logic
