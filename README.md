@@ -24,7 +24,7 @@ class YourTokenListener
 {
     public function handle(Connected $event)
     {
-        $idToken = $event->response['id_token'];
+        $idToken = $this->parseJwt($event->response['id_token']);
 
         DodoisAccount::updateOrCreate([
             'sub' => $idToken['sub'],
