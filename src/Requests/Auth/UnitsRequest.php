@@ -27,10 +27,9 @@ class UnitsRequest implements RequestContract
             ),
         );
 
-        $data = $response->json();
+        // $data = $response->json();
+        // $this->validateResponse($data, ['unitRoles'], 'auth/roles/units');
 
-        $this->validateResponse($data, ['unitRoles'], 'auth/roles/units');
-
-        return collect($data['unitRoles'])->keyBy('id');
+        return collect($response->json())->keyBy('id');
     }
 }
