@@ -88,5 +88,5 @@ Add in you .env file:
 ```env
 DODOIS_CLIENTID=
 DODOIS_SECRET=
-DODOIS_REDIRECTURI=/dodois/callback
+DODOIS_REDIRECTURL=http://localhost/dodois/callback
 ```

@@ -14,7 +14,7 @@ class Connection implements ConnectionContract
     function __construct(
         protected string $clientId,
         protected string $clientSecret,
-        protected string $callbackUri,
+        protected string $callbackUrl,
     ) {}
 
     /**
@@ -68,7 +68,7 @@ class Connection implements ConnectionContract
                 'client_id' => $this->clientId,
                 'scope' => $scope,
                 'response_type' => 'code',
-                'redirect_uri' => $this->callbackUri,
+                'redirect_uri' => $this->callbackUrl,
                 'code_challenge' => $codeChallenge,
                 'code_challenge_method' => 'S256',
             ]),
@@ -91,7 +91,7 @@ class Connection implements ConnectionContract
             'scope' => $scope,
             'code' => $code,
             'grant_type' => 'authorization_code',
-            'redirect_uri' => $this->callbackUri,
+            'redirect_uri' => $this->callbackUrl,
             'client_secret' => $this->clientSecret,
         ]);
 

@@ -31,7 +31,7 @@ class DodoisServiceProvider extends ServiceProvider
             return new Connection(
                 config('dodois.connection.clientId'),
                 config('dodois.connection.clientSecret'),
-                config('dodois.connection.callbackUri')
+                config('dodois.connection.callbackUrl')
             );
         });
     }

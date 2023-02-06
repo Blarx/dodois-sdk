@@ -24,7 +24,7 @@ Route::middleware('web')->group(function () {
         return redirect($dodois->generateAuthLink($code_verifier));
     })->name('dodois:redirect');
 
-    Route::get(config('dodois.connection.callbackUri', '/dodois/callback'), function (ConnectionContract $dodois, Request $request) {
+    Route::get(config('dodois.connection.callbackRoute', '/dodois/callback'), function (ConnectionContract $dodois, Request $request) {
         if (! $request->session()->has('code_verifier')) {
             return redirect()->route('dashboard.accounts')->with([
                 'message' => __("Account create error, no ':field'.", [

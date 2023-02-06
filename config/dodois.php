@@ -14,7 +14,8 @@ return [
     'connection' => [
         'clientId' => env('DODOIS_CLIENTID', ''),
         'clientSecret' => env('DODOIS_SECRET', ''),
-        'callbackUri' => env('DODOIS_REDIRECTURI', '/dodois/callback'),
+        'callbackUrl' => env('DODOIS_REDIRECTURL', '/dodois/callback'),
+        'callbackRoute' => '/dodois/callback',
         'redirectUri' => '/dashboard',
     ],
 
