@@ -54,9 +54,6 @@ Route::middleware('web')->group(function () {
 
         CallbackRedirected::dispatch(
             $response,
-            __("Account create error, no ':field'.", [
-                'field' => 'code',
-            ]),
         );
 
         return $response;
