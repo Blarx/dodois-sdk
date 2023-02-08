@@ -25,7 +25,7 @@ class Client implements ClientContract
         string $name = 'dodopizza',
         string $lang = 'ru',
     ): Resources\AccountingResource {
-        return new Resources\AccountingResource($this->prepare(implode('?', [
+        return new Resources\AccountingResource($this->prepare(implode('/', [
             $name, $lang,
         ])));
     }
@@ -38,7 +38,7 @@ class Client implements ClientContract
         string $name = 'dodopizza',
         string $lang = 'ru',
     ): Resources\DeliveryResource {
-        return new Resources\DeliveryResource($this->prepare(implode('?', [
+        return new Resources\DeliveryResource($this->prepare(implode('/', [
             $name, $lang,
         ])));
     }
@@ -51,7 +51,7 @@ class Client implements ClientContract
         string $name = 'dodopizza',
         string $lang = 'ru',
     ): Resources\ProductionResource {
-        return new Resources\ProductionResource($this->prepare(implode('?', [
+        return new Resources\ProductionResource($this->prepare(implode('/', [
             $name, $lang,
         ])));
     }
@@ -64,7 +64,7 @@ class Client implements ClientContract
         string $name = 'dodopizza',
         string $lang = 'ru',
     ): Resources\StaffResource {
-        return new Resources\StaffResource($this->prepare(implode('?', [
+        return new Resources\StaffResource($this->prepare(implode('/', [
             $name, $lang,
         ])));
     }
