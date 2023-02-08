@@ -15,13 +15,11 @@ class VouchersRequest implements RequestContract
 
     public function list(array $query = []): Collection
     {
+        $this->validateUnitParams($this->getWhereQuery($query, false));
+
         $query = $this->getWhereQuery($query);
-
-        $this->validateUnitParams($query);
-
         $skip = 0;
         $take = 1000;
-
         $vouchers = [];
 
         do {

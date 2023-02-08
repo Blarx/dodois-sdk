@@ -50,12 +50,12 @@ trait HasWhere
         };
     }
 
-    protected function getWhereQuery(array $query = []): array
+    protected function getWhereQuery(array $query = [], bool $prepareValues = true): array
     {
         $query = count($query) ? $query : $this->currentQuery;
 
         foreach ($query as $key => $value) {
-            $query[$key] = $this->prepareWhereValue($value);
+            $query[$key] = $prepareValues ? $this->prepareWhereValue($value) : $value;
         }
 
         return $query;

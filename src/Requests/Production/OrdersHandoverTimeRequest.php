@@ -15,10 +15,9 @@ class OrdersHandoverTimeRequest implements RequestContract
 
     public function list(array $query = []): Collection
     {
+        $this->validateUnitParams($this->getWhereQuery($query, false));
+
         $query = $this->getWhereQuery($query);
-
-        $this->validateUnitParams($query);
-
         $response = $this->resource()->client()->send(
             Method::GET,
             'production/orders-handover-time',

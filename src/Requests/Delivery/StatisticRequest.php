@@ -15,10 +15,9 @@ class StatisticRequest implements RequestContract
 
     public function get(array $query = []): Collection
     {
+        $this->validateUnitParams($this->getWhereQuery($query, false));
+
         $query = $this->getWhereQuery($query);
-
-        $this->validateUnitParams($query);
-
         $response = $this->resource()->client()->send(
             Method::GET,
             'delivery/statistics',
@@ -46,7 +45,7 @@ class StatisticRequest implements RequestContract
 
     public function periodic(int $period = 10, array $query = []): Collection
     {
-        $query = $this->getWhereQuery($query);
+        $query = $this->getWhereQuery($query, false);
 
         $this->validateUnitParams($query);
 
